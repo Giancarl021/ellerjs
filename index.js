@@ -1,6 +1,6 @@
 const Maze = require('./src/maze');
 
-function eller(width, height) {
+function eller(width, height, cleanup = true) {
     if (typeof width !== 'number' || width <= 1)
     throw new Error('Width should be a integer higher than 1');
     if (typeof height !== 'number' || height <= 1)
@@ -18,6 +18,8 @@ function eller(width, height) {
 
         maze.push(currentLine);
     }
+
+    if (cleanup) Maze.cleanup(maze);
 
     return maze;
 };

@@ -50,7 +50,7 @@ test('maze has borders', () => {
 })
 
 test('maze has no closed sets', () => {
-  const maze = eller(24, 26);
+  const maze = eller(24, 26, false);
 
   maze.forEach((line, i) => {
     // don't check last line
@@ -59,6 +59,9 @@ test('maze has no closed sets', () => {
     }
 
     const sets = new Set(line.map((cell) => cell._set));
+
+    if (!sets.size || (sets.size === 1 && [...sets.values()][0] === undefined))
+        throw new Error('No sets found in cells');
 
     for (let set of sets) {
       const cells = line.filter((cell) => cell._set === set);

@@ -59,7 +59,15 @@ function finalize(lastLine) {
 
         cell.right = false;
         nextCell.left = false;
-    } 
+    }
+}
+
+function cleanup(maze) {
+    for (const line of maze) {
+        for (const cell of line) {
+            delete cell._set;
+        }
+    }
 }
 
 function _sets(line) {
@@ -137,5 +145,6 @@ module.exports = {
     initialize,
     createLine,
     finalize,
+    cleanup,
     addBottomWalls
 };
